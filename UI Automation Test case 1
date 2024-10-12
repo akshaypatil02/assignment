@@ -1,0 +1,16 @@
+const context = await browser.newContext();
+const page = await context.newPage();
+await page.goto('https://blockstream.info/block/000000000000000000076c036ff5119e5a5a74df77abf64203473364509f7732');
+
+//locators
+readonly transactionHeading : Locators;
+
+//Asiigning value to locators
+this.transactionHeading = page.locator('//div[@class='transactions']/child::*[1]');
+
+//Assertions
+await expect(this.transactionHeading).toBeVisible();
+var headingTextContent = await transactionHeading.textContent();
+await expect(headingTextContent).toBe("25 of 2875 Transactions");
+
+await context.close();
